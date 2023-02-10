@@ -10,14 +10,27 @@ import QtQuick.Controls
 import Create_My_First_App_With_Qt
 
 Rectangle {
+    id: rectangle
     width: Constants.width
     height: Constants.height
 
     color: Constants.backgroundColor
 
-    Text {
-        text: qsTr("Hello Create_My_First_App_With_Qt")
-        anchors.centerIn: parent
-        font.family: Constants.font.family
+    Button {
+        id: addToDoButton
+        y: 347
+        text: qsTr("Add Todo")
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 10
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 10
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.9}D{i:1}
+}
+##^##*/
