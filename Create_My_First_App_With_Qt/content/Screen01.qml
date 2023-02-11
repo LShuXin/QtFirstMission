@@ -19,7 +19,7 @@ Rectangle {
     property bool isDialogOpen: false
 
     Text {
-        id: text1
+        id: title
         text: qsTr("To Do")
         anchors.left: parent.left
         anchors.right: parent.right
@@ -32,20 +32,58 @@ Rectangle {
         anchors.topMargin: 10
     }
 
-    Button {
-        id: addToDoButton
-        y: 347
-        text: qsTr("Add Todo")
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: 10
-        anchors.leftMargin: 10
-        anchors.bottomMargin: 10
 
-        Connections {
-            target: addToDoButton
-            onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
+
+
+
+
+    Column {
+        id: column
+        anchors.fill: parent
+        spacing: 20
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 20
+        anchors.topMargin: 50
+
+        Repeater {
+            id: repeater
+            anchors.fill: parent
+            model: ListModel {
+              id: myListModel
+              ListElement {
+                name: "My ToDo"
+              }
+              function createListElement() {
+                  return {
+                    "name": toDoTextInput.text
+                  }
+              }
+            }
+
+            Rectangle {
+                id: toDoItem
+                x: 0
+                y: -4
+                height: 49
+                color: "#d6d7d7"
+                radius: 8
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+                anchors.leftMargin: 10
+                anchors.topMargin: 46
+
+                CheckBox {
+                    id: checkBox
+                    text: name
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 1
+                    anchors.leftMargin: 0
+                    anchors.topMargin: 0
+                }
+            }
         }
     }
 
@@ -118,63 +156,27 @@ Rectangle {
         }
     }
 
-    Column {
-        id: column
-        anchors.fill: parent
-        spacing: 20
+    Button {
+        id: addToDoButton
+        y: 347
+        text: qsTr("Add Todo")
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 10
         anchors.leftMargin: 10
-        anchors.bottomMargin: 20
-        anchors.topMargin: 50
+        anchors.bottomMargin: 10
 
-        Repeater {
-            id: repeater
-            anchors.fill: parent
-            model: ListModel {
-              id: myListModel
-              ListElement {
-                name: "My ToDo"
-              }
-              function createListElement() {
-                  return {
-                    "name": toDoTextInput.text
-                  }
-              }
-            }
-
-            Rectangle {
-                id: toDoItem
-                x: 0
-                y: -4
-                height: 49
-                color: "#d6d7d7"
-                radius: 8
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.rightMargin: 10
-                anchors.leftMargin: 10
-                anchors.topMargin: 46
-
-                CheckBox {
-                    id: checkBox
-                    text: name
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 1
-                    anchors.leftMargin: 0
-                    anchors.topMargin: 0
-                }
-            }
+        Connections {
+            target: addToDoButton
+            onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
         }
     }
-
-
-
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9}D{i:13}
+    D{i:0;formeditorZoom:0.9}D{i:2}
 }
 ##^##*/
 
